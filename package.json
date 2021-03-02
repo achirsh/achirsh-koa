@@ -1,27 +1,33 @@
 {
-  "name": "koa-demo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "server": "npx babel-node index.js",
-    "start": "nodemon index.js --exec babel-node"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@babel/core": "^7.12.17",
-    "@babel/node": "^7.12.17",
-    "@babel/preset-env": "^7.12.17",
-    "@babel/register": "^7.12.13",
-    "@koa/cors": "^3.1.0",
-    "koa": "^2.13.1",
-    "koa-body": "^4.2.0",
-    "koa-json": "^2.0.2",
-    "koa-jwt": "^4.0.0",
-    "koa-logger": "^3.2.1",
-    "koa-router": "^10.0.0",
-    "mysql2": "^2.2.5",
-    "sequelize": "^6.5.0"
-  }
+    "name": "koa-demo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "server": "npx babel-node index.js",
+        "start": "nodemon index.js --exec babel-node"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@koa/cors": "^3.1.0",
+        "koa": "^2.13.1",
+        "koa-body": "^4.2.0",
+        "koa-json": "^2.0.2",
+        "koa-jwt": "^4.0.0",
+        "koa-logger": "^3.2.1",
+        "koa-router": "^10.0.0",
+        "koa-static": "^5.0.0",
+        "log4js": "^6.3.0",
+        "mysql2": "^2.2.5",
+        "nodemon": "^2.0.7",
+        "probe-image-size": "^6.0.0",
+        "sequelize": "^5.12.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.13.1",
+        "@babel/node": "^7.13.0",
+        "@babel/preset-env": "^7.13.5",
+        "@babel/register": "^7.13.0"
+    }
 }
