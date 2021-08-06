@@ -35,30 +35,24 @@ const postUserAuth = async ctx => {
 
 const getInfo = async ctx => {
     const { request, query } = ctx
-    var body = null
-    jwt.verify(request.header.token, sercet, async(err, authData) => {
-        if (err) {
-
-        } else {
-            const userAuth = await user.getUserById(authData.id);
-            logger.info(userAuth)
-            if (userAuth !== null) {
-                body = {
-                    code: '0000',
-                    info: '查询成功',
-                    data: userAuth.dataValues
-                }
-            } else {
-                body = {
-                    code: '403',
-                    info: '查无此人',
-                    data: null
-                }
+    let body = null
+    const authData = await jwt.verify(request.header.token, sercet)
+    if (authData) {
+        const userAuth = await user.getUserById(authData.id);
+        if (userAuth) {
+            body = {
+                code: '0000',
+                info: '查询成功',
+                data: userAuth.dataValues
             }
-            logger.info('58', body)
+        } else {
+            body = {
+                code: '403',
+                info: '查无此人',
+                data: null
+            }
         }
-    })
-    logger.info('61', body)
+    }
     ctx.body = body;
 }
 
