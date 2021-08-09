@@ -7,7 +7,7 @@
     },
     "rules": {
         "semi": ["error", "always"],
-        "quotes": "off",
+        // "quotes": "off",
         "no-console": "off",
         "no-unreachable": "off",
         "no-redeclare": "warn"
