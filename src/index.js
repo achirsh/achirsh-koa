@@ -3,7 +3,7 @@ import koaRouter from 'koa-router'
 import json from 'koa-json'
 import logger from 'koa-logger'
 
-import api from './src/routes/api';
+import api from './routes/api';
 import koaBody from 'koa-body'
 import statics from 'koa-static';
 import path from 'path';
@@ -23,7 +23,7 @@ app.use(async(ctx, next) => {
 })
 
 app.on('error', (err, ctx) => {
-    console.log('server error', err)
+    console.log("server error", err)
 })
 
 router.use('/api', api.routes())

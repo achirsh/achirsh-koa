@@ -4,8 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "server": "npx babel-node index.js",
-        "start": "nodemon index.js --exec babel-node",
+        "start": "nodemon src/index.js --exec babel-node",
         "lint": "eslint --ext .js",
         "prettier": "prettier -c --write \"src/**/*\"",
         "prepare": "husky install",
