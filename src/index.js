@@ -18,7 +18,7 @@ app.use(logger())
 //静态服务
 app.use(statics(path.join(__dirname, './upload/')))
 
-app.use(async(ctx, next) => {
+app.use((ctx, next) => {
     await next()
 })
 
