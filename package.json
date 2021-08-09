@@ -16,8 +16,8 @@
         }
     },
     "lint-staged": {
-        "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
-        "**/*.{js,jsx,ts,md,json}": [
+        "*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
+        "*.{js,jsx,ts,md,json}": [
             "prettier --write"
         ]
     },
