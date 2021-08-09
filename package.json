@@ -16,8 +16,8 @@
         }
     },
     "lint-staged": {
-        "*.{js,jsx,ts,tsx}": "eslint --ext .js",
-        "*.{js,jsx,ts,md,json}": [
+        "src/**/*.js": [
+            "eslint --ext .js",
             "prettier --write"
         ]
     },
