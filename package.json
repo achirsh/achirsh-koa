@@ -5,7 +5,22 @@
     "main": "index.js",
     "scripts": {
         "server": "npx babel-node index.js",
-        "start": "nodemon index.js --exec babel-node"
+        "start": "nodemon index.js --exec babel-node",
+        "lint": "eslint --ext .js",
+        "prettier": "prettier -c --write \"src/**/*\"",
+        "prepare": "husky install",
+        "lint-staged:js": "eslint --ext .js"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
+        "**/*.{js,jsx,ts,md,json}": [
+            "prettier --write"
+        ]
     },
     "author": "",
     "license": "ISC",
@@ -28,6 +43,11 @@
         "@babel/core": "^7.13.1",
         "@babel/node": "^7.13.0",
         "@babel/preset-env": "^7.13.5",
-        "@babel/register": "^7.13.0"
+        "@babel/register": "^7.13.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.32.0",
+        "husky": "^7.0.0",
+        "lint-staged": "^11.1.2",
+        "prettier": "^2.3.2"
     }
 }

@@ -3,7 +3,7 @@ import koaRouter from 'koa-router'
 import json from 'koa-json'
 import logger from 'koa-logger'
 
-import api from './server/routes/api';
+import api from './src/routes/api';
 import koaBody from 'koa-body'
 import statics from 'koa-static';
 import path from 'path';
