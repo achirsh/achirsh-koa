@@ -1,0 +1,12 @@
+**/*.svg
+package.json
+.DS_Store
+.eslintignore
+*.png
+docker
+Dockerfile*
+.gitignore
+.prettierignore
+LICENSE
+*.lock
+yarn-error.log

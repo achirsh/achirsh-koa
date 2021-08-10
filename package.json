@@ -5,19 +5,12 @@
     "main": "index.js",
     "scripts": {
         "start": "nodemon src/index.js --exec babel-node",
-        "lint": "eslint --ext .js",
         "prettier": "prettier -c --write \"src/**/*\"",
-        "prepare": "husky install",
-        "lint-staged:js": "eslint --ext .js"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
+        "lint:fix": "eslint --fix --cache --ext .js --format=pretty ./src"
     },
     "lint-staged": {
         "src/**/*.js": [
-            "eslint --fix",
+            "eslint --ext .js",
             "prettier --write"
         ]
     },
@@ -45,6 +38,10 @@
         "@babel/register": "^7.13.0",
         "babel-eslint": "^10.1.0",
         "eslint": "^7.32.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.24.0",
+        "eslint-plugin-prettier": "^3.4.0",
         "husky": "^7.0.0",
         "lint-staged": "^11.1.2",
         "prettier": "^2.3.2"

@@ -1,7 +1,7 @@
-import auth from '../controllers/login';
-import user from '../controllers/user';
-import resource from '../controllers/resource';
-import koaRouter from 'koa-router';
+import koaRouter from 'koa-router'
+import auth from '../controllers/login'
+import user from '../controllers/user'
+import resource from '../controllers/resource'
 
 const router = koaRouter()
 

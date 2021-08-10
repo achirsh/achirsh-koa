@@ -1,17 +1,17 @@
-var DataTypes = require("sequelize").DataTypes;
-var _resource = require("./resource");
-var _user = require("./user");
+const { DataTypes } = require('sequelize')
+const Resource = require('./resource')
+const User = require('./user')
 
 function initModels(sequelize) {
-  var resource = _resource(sequelize, DataTypes);
-  var user = _user(sequelize, DataTypes);
+    const resource = Resource(sequelize, DataTypes)
+    const user = User(sequelize, DataTypes)
 
-
-  return {
-    resource,
-    user,
-  };
+    return {
+        resource,
+        user,
+    }
 }
-module.exports = initModels;
-module.exports.initModels = initModels;
-module.exports.default = initModels;
+
+export default {
+    initModels,
+}
