@@ -1,30 +1,30 @@
-import fs from 'fs';
-import path from 'path';
-import res from '../models/resource';
-import _res from '../utils/response';
-import probe from 'probe-image-size';
+import fs from 'fs'
+import path from 'path'
+import probe from 'probe-image-size'
+import res from '../models/resource'
+import Res from '../utils/response'
 import tools from '../utils/tools'
 
-const imageUrl = `${process.env.SERVER_URL}/image/`;
-const imagePath = path.join(__dirname, '../../upload/image');
+const imageUrl = `${process.env.SERVER_URL}/image/`
+const imagePath = path.join(__dirname, '../../upload/image')
 
-const videoUrl = `${process.env.SERVER_URL}/video/`;
-const videoPath = path.join(__dirname, '../../upload.video');
+// const videoUrl = `${process.env.SERVER_URL}/video/`
+// const videoPath = path.join(__dirname, '../../upload.video')
 
-const uploadImage = async ctx => {
-    const file = ctx.request.files.file;
+const uploadImage = async (ctx) => {
+    const { file } = ctx.request.files
 
     // 检查重名文件
-    const repeat = await res.getResByName(file.name);
+    const repeat = await res.getResByName(file.name)
     if (repeat) {
-        ctx.body = _res.error(`资源中已存在【${file.name}】文件`)
+        ctx.body = Res.error(`资源中已存在【${file.name}】文件`)
         return false
     }
 
-    const reader = fs.createReadStream(file.path); // 创建可读流
+    const reader = fs.createReadStream(file.path) // 创建可读流
 
     // 获取图片流的尺寸，注意，这里不能直接使用reader，不然会导致图片损坏
-    let measure = await probe(fs.createReadStream(file.path));
+    const measure = await probe(fs.createReadStream(file.path))
 
     const upStream = fs.createWriteStream(`${imagePath}\\${file.name}`)
 
@@ -36,48 +36,52 @@ const uploadImage = async ctx => {
         url: `${imageUrl}${file.name}`,
         type: 'image',
         operator: 'admin',
-        time: tools.dateTimeFormat()
+        time: tools.dateTimeFormat(),
     }
 
     await res.postRes(data)
     if (!fs.existsSync(imagePath)) {
-        fs.mkdir(imagePath, err => {
+        fs.mkdir(imagePath, (err) => {
             if (err) throw err
             reader.pipe(upStream) // 可读流通过管道写入可写流
-            return ctx.body = _res.success('上传成功')
+            ctx.body = Res.success('上传成功')
+            return true
         })
     } else {
         reader.pipe(upStream) // 可读流通过管道斜土可写流
-        return ctx.body = _res.success('上传成功')
+        ctx.body = Res.success('上传成功')
+        return true
     }
+
+    return false
 }
 
-const getResImageList = async ctx => {
-    const data = ctx.query;
+const getResImageList = async (ctx) => {
+    const data = ctx.query
 
-    const list = await res.getRes(data, 'image');
-    const _resData = {
+    const list = await res.getRes(data, 'image')
+    const resData = {
         pages: {
-            total: list.count
+            total: list.count,
         },
-        source: list.rows
+        source: list.rows,
     }
-    ctx.body = _res.success('成功', _resData)
+    ctx.body = Res.success('成功', resData)
 }
 
-const delResImage = async ctx => {
-    const data = ctx.request.query;
-    const image = await res.getResById(data.id);
+const delResImage = async (ctx) => {
+    const data = ctx.request.query
+    const image = await res.getResById(data.id)
 
     fs.unlink(`${imagePath}\\${image.name}`, (err) => {
-        if (err) throw err;
+        if (err) throw err
         res.deleteRes(data.id)
-    });
-    ctx.body = _res.success('删除成功!')
+    })
+    ctx.body = Res.success('删除成功!')
 }
 
 export default {
     uploadImage,
     getResImageList,
-    delResImage
+    delResImage,
 }

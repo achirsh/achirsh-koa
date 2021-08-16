@@ -30,6 +30,8 @@ app.on('error', (err, ctx) => {
 router.use('/api', api.routes())
 app.use(router.routes())
 
-app.listen(3000)
+app.listen(3001, () => {
+    console.log('我启动了')
+})
 
 export default app
